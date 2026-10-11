@@ -1,6 +1,36 @@
-@MovieStoreApi_HostAddress = http://localhost:5200
+@MovieStoreApi_HostAddress = https://localhost:7166
 
-GET {{MovieStoreApi_HostAddress}}/weatherforecast/
-Accept: application/json
+### 1. Get all (should show your 2 seeded movies)
+GET {{MovieStoreApi_HostAddress}}/api/movies
 
-###
+### 2. Create (the Id of the new movie is saved automatically)
+# @name createMovie
+POST {{MovieStoreApi_HostAddress}}/api/movies
+Content-Type: application/json
+
+{
+  "Title": "Interstellar",
+  "Price": 14.99,
+  "Genre": "Sci-Fi",
+  "Director": "Christopher Nolan"
+}
+
+### 3. Get one (uses the Id from request 2)
+GET {{MovieStoreApi_HostAddress}}/api/movies/{{createMovie.response.body.$.Id}}
+
+### 4. Update (expect 204)
+PUT {{MovieStoreApi_HostAddress}}/api/movies/{{createMovie.response.body.$.Id}}
+Content-Type: application/json
+
+{
+  "Title": "Interstellar (Director's Cut)",
+  "Price": 16.99,
+  "Genre": "Sci-Fi",
+  "Director": "Christopher Nolan"
+}
+
+### 5. Get all again (Interstellar should show the new title)
+GET {{MovieStoreApi_HostAddress}}/api/movies
+
+### 6. Delete (expect 204)
+DELETE {{MovieStoreApi_HostAddress}}/api/movies/{{createMovie.response.body.$.Id}}
