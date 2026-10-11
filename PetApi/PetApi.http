@@ -1,6 +1,28 @@
 @PetApi_HostAddress = http://localhost:5227
+### 1. Create
+POST {{PetApi_HostAddress}}/api/pets
+Content-Type: application/json
 
-GET {{PetApi_HostAddress}}/weatherforecast/
-Accept: application/json
+{
+  "name": "Rex",
+  "isAdopted": false
+}
 
-###
+### 2. Get all
+GET {{PetApi_HostAddress}}/api/pets
+
+### 3. Get one
+GET {{PetApi_HostAddress}}/api/pets/1
+
+### 4. Update (expect 204)
+PUT {{PetApi_HostAddress}}/api/pets/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Rex the Great",
+  "isAdopted": true
+}
+
+### 5. Delete (expect 204)
+DELETE {{PetApi_HostAddress}}/api/pets/1
