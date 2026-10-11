@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Pet Adoption CRUD</title>
+    <style>
+        input[type='text'], button, table {
+            font-size: 1rem;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 4px 8px;
+        }
+
+        #editForm {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pet Adoption CRUD</h1>
+
+    <h3>Add</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
+        <input type="text" id="add-name" placeholder="New pet name">
+        <input type="submit" value="Add">
+    </form>
+
+    <div id="editForm">
+        <h3>Edit</h3>
+        <form action="javascript:void(0);" onsubmit="updateItem()">
+            <input type="hidden" id="edit-id">
+            <input type="checkbox" id="edit-isAdopted">
+            <input type="text" id="edit-name">
+            <input type="submit" value="Save">
+            <a onclick="closeInput()" style="cursor:pointer">&#10006;</a>
+        </form>
+    </div>
+
+    <p id="counter"></p>
+
+    <table>
+        <tr>
+            <th>Adopted?</th>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tbody id="pets"></tbody>
+    </table>
+
+    <script src="js/site.js"></script>
+    <script>
+        getItems();
+    </script>
+</body>
+</html>
